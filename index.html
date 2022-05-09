@@ -19,9 +19,9 @@
       Graffiti
     </h1>
     <h2>
-      The Potential for Anarchy in the Formation of Online Spaces
+      The Potential for Anarchism in the Design of Social Applications
     </h2>
-    <p class="attribution">Theia Henderson and David Karger</p>
+    <p class="attribution">by Theia Henderson, advised by David Karger</p>
   </header>
 
   <section>
@@ -41,25 +41,29 @@
 
     <article class="slide delay">
       <h1>
+        Benevolent CEO Approach
+      </h1>
+      Well I sure hope Mark Zuckerberg thinks these are bad and tries to fix it clown face
+
+      Sometimes this works!
+
+      But sometimes these companies knowingly perpetuate design patterns they know literally kill.
+    </article>
+
+    <article class="slide delay">
+      <h1>
         Democratic Approach
       </h1>
 
-      "Somehow tell the people at the top know what you want and hope they implement it"
+      Rally around a cause "I want an edit button!"
+      Force the existing applications to change, through public support, 
 
-      Public movements
-      Legislation
+      This is possible: e.g. EU law on privacy.
 
+      democratic processes are
       - slow
-      - silences minority voices
-
-      Modern government is extremely inefficient.
-      Rapid changes necessary to respond to crisis.
-
-      Tweet @ Elon Musk
-      Benevolent Dictator - chaotic, limited bandwidth
-
-      both coarse approached.
-      "Hey facebook, can you add a feature for X?
+      - coarse
+      - biased
     </article>
 
     <article class="slide">
@@ -67,9 +71,9 @@
         Anarchist Approach
       </h1>
 
-      "...rejects all involuntary, coercive forms of hierarchy."
+      Let people use whatever interfaces, filters, algorithms, moderators and broadcast patterns they want!
 
-      How is our relationship to our current social media coercive?
+      "Ok, but no one is <i>forcing</i> me to use [insert oppressive social application... Isn't that already the case?"
     </article>
 
     <article class="slide">
@@ -81,8 +85,41 @@
     </article>
 
     <article class="slide">
-      Anarchism is a political philosophy and movement that 
-      - Wikipedia
+      What if were possible for many applications to share the same infrastructure so that by leaving you 
+    </article>
+
+
+    <article class="slide">
+      <h1>Even a social network in a slideshow...</h1>
+      <graffiti-app data='{"editing": false}'>
+        <graffiti-collection v-slot="name"
+          :query="{
+            type: 'description',
+            subject: graffiti.myID,
+            descriptor: 'name',
+            description: {'$type': 'string'},
+            _by: graffiti.myID
+          }">
+          Whats your name?
+          <template v-if="editing">
+            <input :value="editText">
+            <button @click="editing=false">
+              save
+            </button>
+          </template>
+          <template v-else>
+            <template v-if="name.object">
+              {{name.object.object}}
+            </template>
+            <template v-else>
+              It looks like you don't have a name!
+            </template>
+            <button @click="editing=true">
+              edit me!
+            </button>
+          </template>
+        </graffiti-collection>
+      </graffiti-app>
     </article>
 
     <article class="slide">
@@ -187,5 +224,111 @@
     </article>
   </section>
 
+  <article class="slide">
+    <h1>So how does this work?</h1>
+    show squiggles
+    follow with moderator example
+  </article>
+
+  <article class="slide">
+    <h1>Context</h1>
+
+    In real life things happen in physical places.
+
+    These places may be public and even contain similar people, by space itself.
+
+    When I'm at a bar, I implicitly know the people around me also made a choice to come to the bar
+    
+    so they've made an implicit 
+    so they must be expecting the type of activity associated with bar.
+
+    Even if these places are public, we act differently they can carry different meaning.
+
+    Church and Bar.
+
+    Online things
+
+    Suppose I'm talking to people under the tag "Paddy's Pub" which is associated with the query
+    {
+      type: "post",
+      content: { "$type": "string" },
+      tags: "Paddy's Pub"
+    }
+
+    Conversation that goes like:
+
+
+    Now my colleague come's around and look "My Wall" e.g. all the posts by me
+
+    {
+      type: "Post",
+      _by: [My ID]
+    }
+
+      content: "yoooooooooooo let's do shots"
+      tags: ["Paddy's Pub"]
+
+    Some recruiter come's
+
+
+
+
+
+    "at school", "at work".
+    Even if places are public, they carry different meaning.
+
+    Online things happen in places too.
+
+    By app: "on twitter", "on facebook"
+    By category: "in a channel", "in a forum", "on a subreddit", "on gay TikTok"
+    In relation to other places: "in a comments section", "in a thread" "in a folder"
+    By identity: "on my wall", "@me"
+    By location: "at an event", "in my neighborhood", "in a radius"
+
+    Sometimes things happen in multiple places at once, sometime things are in intersecting places.
+
+    In a system where you can just query for whatever you want, how can I make sure?
+  </article>
+
+  <article class="slide">
+    <h1>
+      Context is often a <i>crucial</i> but <i>invisible</i> design element of a social space.
+    </h1>
+  </article>
+
+  <article class="slide">
+    <h1>
+      \rant: why I don't use Twitter
+    </h1>
+
+    When you interact with twitter, either by commenting or liking something, those actions can be shared with all of your twitter followers.
+    I follow a bunch of different people on twitter and if my academic friends interacted with my queer friends that would be fine, but I'm not going out of my way to say "look how gay I am.
+
+    <h1>rant/</h1>
+  </article>
+
+
+  <article class="slide">
+    One way that data could be stored is within a hierarchy.
+    This comment is *within* 
+
+  </article>
+
+  How does context work
+  Not useful if you're all going to be doing stuff at the same time.
+  Where do you "put" stuff.
+  This is important for the end user.
+  Also important for the speaker - people change what they say based on who their audience is.
+  Let's say I want to create a band people nearby who are interested in music.
+  Often we represent things in hierarchies.
+  Is it first people nearby -> people interested in music.
+  or people interested in music -> people nearby.
+
+  <article>
+    How does this compare to Solid? ActivityPub?
+    (good for talk to people *on your server* and for talking to people who you have specific relationships with. conflates hardware and community.)
+    Is this decentralized? Not yet!
+    Does that matter?
+  </article>
 </body>
 </html>
