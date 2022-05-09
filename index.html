@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>graffiti presentation</title>
+  <script src="https://unpkg.com/vue@3.2.31/dist/vue.global.prod.js"></script>
+  <script type="module" src="https://sportdeath.graffiti.io/graffiti-tools/vue.js"></script> 
+  <script src="https://inspirejs.org/inspire.mjs" type="module"></script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <link href="https://inspirejs.org/inspire.css" rel="stylesheet" />
+  <link href="https://inspirejs.org/theme.css" rel="stylesheet" />
+</head>
+<body>
+
+  <header id="intro" class="slide">
+    <h1>
+      Graffiti
+    </h1>
+    <h2>
+      The Potential for Anarchy in the Formation of Online Spaces
+    </h2>
+    <p class="attribution">By Theia Henderson</p>
+  </header>
+
+  <section>
+    <header class="slide">
+      <h1>Introduction</h1>
+    </header>
+
+    <article class="slide delay">
+      Lots of Problems with social media
+      <ul>
+        <li>Addicting</li>
+        <li>Depressing</li>
+        <li>Polarizing</li>
+        <li>...</li>
+      </ul>
+    </article>
+
+    <article class="slide delay">
+      <h1>
+        Democratic Approach
+      </h1>
+
+      "Somehow tell the people at the top know what you want and hope they implement it"
+
+      Public movements
+      Legislation
+
+      - slow
+      - silences minority voices
+
+      Modern government is extremely inefficient.
+      Rapid changes necessary to respond to crisis.
+
+      Tweet @ Elon Musk
+      Benevolent Dictator - chaotic, limited bandwidth
+
+      both coarse approached.
+      "Hey facebook, can you add a feature for X?
+    </article>
+
+    <article class="slide">
+      <h1>
+        Anarchist Approach
+      </h1>
+
+      "...rejects all involuntary, coercive forms of hierarchy."
+
+      How is our relationship to our current social media coercive?
+    </article>
+
+    <article class="slide">
+      <h1>
+        Network Effect
+      </h1>
+
+      If you leave you will have no friends.
+    </article>
+
+    <article class="slide">
+      Anarchism is a political philosophy and movement that 
+      - Wikipedia
+    </article>
+
+    <article class="slide">
+      <graffiti-app>
+        Say hello!
+
+        <graffiti-collection v-slot="posts"
+          :query="{
+            type: 'Post',
+            content: { '$type': 'string' },
+            tags: 'dimacs'
+          }"
+          :page-size="10"
+          :live="true" >
+
+          <form @submit.prevent="posts.update({
+            type: 'Post', 
+            content: postContent,
+            tags: ['dimacs'],
+            _contexts: [{
+              _nearMisses: [{
+                tags: ['notdimacs']
+              }]
+            }],
+            _by: graffiti.myID
+          }); postContent=''">
+            <input v-model="postContent" />
+            <input type="submit" value="post" />
+          </form>
+
+          <ul>
+            <li v-for="post in posts.objects" :key="post._id">
+
+              {{post.content}}
+
+              <graffiti-collection v-slot="likes"
+                :query="{
+                  type: 'Like',
+                  at: post._id,
+                  _by: { '$exists': 'true' }
+                }"
+                :page-size="100"
+                :live="true" >
+
+                {{likes.objects.length}}
+
+                <template v-if="!likes.objects.filter(l => l._by==graffiti.myID).length">
+                  <button @click="likes.update({
+                    type: 'Like',
+                    at: post._id,
+                    _by: graffiti.myID,
+                    _contexts: [{
+                      _nearMisses: [{
+                        at: 'not' + post._id
+                      }]
+                    }]
+                  })">like</button>
+                </template>
+                <template v-else>
+                  <button @click="likes.delete(likes.objects.filter(l => l._by==graffiti.myID)[0]._id)">
+                    unlike
+                  </button>
+                </template>
+
+              </graffiti-collection>
+
+              <template v-if="post._by==graffiti.myID">
+                <button @click="posts.delete(post._id)">delete</button>
+              </template>
+            </li>
+          </ul>
+        </graffiti-collection>
+      </graffiti-app>
+    </article>
+
+    <article class="demo slide" id="livedemo">
+      <textarea class="language-html">
+        <graffiti-app>
+          <graffiti-collection v-slot="posts"
+            :query="{
+              type: 'Post',
+              content: { '$type': 'string' },
+              tags: 'chi'
+            }"
+            :page-size="20"
+            :live="true" >
+
+            <ul>
+              <li v-for="post in posts.objects">
+                {{post.content}}
+              </li>
+            </ul>
+          </graffiti-collection>
+        </graffiti-app>
+      </textarea>
+      <textarea class="language-css">
+        p {
+          font-size: 250%;
+          color: #f06;
+        }
+      </textarea>
+    </article>
+  </section>
+
+</body>
+</html>
