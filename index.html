@@ -10,7 +10,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
   <link href="https://inspirejs.org/inspire.css" rel="stylesheet" />
-  <link href="https://inspirejs.org/theme.css" rel="stylesheet" />
+  <link href="theme.css" rel="stylesheet" />
 </head>
 <body>
 
@@ -21,23 +21,25 @@
     <h2>
       The Potential for Anarchism in the Design of Social Applications
     </h2>
-    <p class="attribution">by Theia Henderson, advised by David Karger</p>
+    <p class="attribution">Theia Henderson and David Karger</p>
   </header>
 
-  <section>
-    <header class="slide">
-      <h1>Introduction</h1>
-    </header>
 
-    <article class="slide delay">
-      Lots of Problems with social media
-      <ul>
-        <li>Addicting</li>
-        <li>Depressing</li>
-        <li>Polarizing</li>
-        <li>...</li>
-      </ul>
-    </article>
+  <article id="social-media-bad" class="slide delay">
+    Social media can be:
+    <ul class="delayed-children">
+      <li>Addicting</li>
+      <li>Depressing</li>
+      <li>Enraging</li>
+      <li>A vector for misinformation</li>
+      <li>...</li>
+    </ul>
+    <span class="delayed">What can we do about it?</span>
+  </article>
+
+  <article id="social-media-bad" class="slide delay">
+    What?
+  </article>
 
     <article class="slide delay">
       <h1>
@@ -222,7 +224,6 @@
         }
       </textarea>
     </article>
-  </section>
 
   <article class="slide">
     <h1>So how does this work?</h1>
@@ -314,6 +315,7 @@
 
   </article>
 
+  <!--
   How does context work
   Not useful if you're all going to be doing stuff at the same time.
   Where do you "put" stuff.
@@ -323,8 +325,9 @@
   Often we represent things in hierarchies.
   Is it first people nearby -> people interested in music.
   or people interested in music -> people nearby.
+  -->
 
-  <article>
+  <article class="slide">
     How does this compare to Solid? ActivityPub?
     (good for talk to people *on your server* and for talking to people who you have specific relationships with. conflates hardware and community.)
     Is this decentralized? Not yet!
