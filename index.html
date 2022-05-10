@@ -3,18 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <title>graffiti presentation</title>
+
+  <!-- Graffiti Dependencies --> 
   <script src="https://unpkg.com/vue@3.2.31/dist/vue.global.prod.js"></script>
-  <script type="module" src="https://sportdeath.github.io/graffiti-tools/vue.js"></script> 
+  <script type="module" src="external/graffiti-tools/vue.js"></script>
+
+  <!-- Slide Dependencies -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/blissfuljs/1.0.6/bliss.shy.min.js"></script>
   <script src="https://inspirejs.org/inspire.mjs" type="module"></script>
+  <link href="https://inspirejs.org/inspire.css" rel="stylesheet" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-  <link href="https://inspirejs.org/inspire.css" rel="stylesheet" />
   <link href="theme.css" rel="stylesheet" />
 </head>
 <body>
 
-  <header id="intro" class="slide">
+  <header id="title" class="slide">
     <h1>
       Graffiti
     </h1>
@@ -26,30 +31,123 @@
 
 
   <article id="social-media-bad" class="slide delay">
-    Social media can be:
+    Social media today can be:
     <ul class="delayed-children">
       <li>Addicting</li>
-      <li>Depressing</li>
-      <li>Enraging</li>
-      <li>A vector for misinformation</li>
+      <li>
+        Depressing
+        <span class="cite">
+          <a href="https://docs.google.com/document/d/1diMvsMeRphUH7E6D1d_J7R6WbDdgnzFHDHPx9HXzR5o/edit">📖</a>,
+          <a href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0069841">📖</a>,
+          <a href="https://www.sciencedirect.com/science/article/abs/pii/S0140197116300343">📖</a>
+        </span>
+      </li>
+      <li>
+        Enraging
+        <span class="cite">
+          <a href="https://www.wsj.com/articles/facebook-algorithm-change-zuckerberg-11631654215">📖</a>
+        </span>
+      </li>
+      <li>
+        A vector for misinformation
+        <span class="cite">
+          <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3144139">📖</a>
+        </span>
+      </li>
       <li>...</li>
     </ul>
-    <span class="delayed">What can we do about it?</span>
+    <span class="delayed">Can we do better?</span>
   </article>
 
   <article id="social-media-bad" class="slide delay">
-    What?
+    <h1>
+      Yes!
+    </h1>
+
+    <div class="flex-container delayed-children">
+      <div class="flex-item">
+        <a href="">
+          <img class="flex-item" src="media/wsj0.png"/>
+        </a>
+      </div>
+      <div class="flex-item">
+        <a href="">
+          <img class="flex-item" src="media/wsj1.png"/>
+        </a>
+      </div>
+      <div class="flex-item">
+        <a href="">
+          <img class="flex-item" src="media/wsj2.png"/>
+        </a>
+      </div>
+    </div>
   </article>
 
-    <article class="slide delay">
+  <article id="social-media-bad" class="slide delay">
+    <h1>
+      Individual and Community Design Too!
+    </h1>
+
+    <div class="flex-container delayed-children">
+      <div class="flex-item">
+        <a href="https://dl.acm.org/doi/abs/10.1145/3411764.3445757">
+          <img class="flex-item" src="media/dearboard.png"/>
+        </a>
+      </div>
+      <div class="flex-item">
+        <a href="https://dl.acm.org/doi/abs/10.1145/2858036.2858409">
+          <img class="flex-item" src="media/aoto.png"/>
+        </a>
+      </div>
+      <div class="flex-item">
+        <a href="https://dl.acm.org/doi/abs/10.1145/3411764.3445757">
+          <img class="flex-item" src="media/myspace.webp"/>
+        </a>
+      </div>
+    </div>
+  </article>
+
+  <article class="slide delay">
+    <p>
+      So why are most people still using bad interfaces?
+    </p>
+    <p class="delayed">
+      Because that's what all of their friends are using.
+      (The network effect).
+    </p>
+  </article>
+
+  So how do we overcome this?
+
+  Amass a large following.
+  Either create a new platform or create legislation that will modify existing platforms.
+
+  Very slow, coarse, 
+  Try and change the existing platforms.
+  
       <h1>
         Benevolent CEO Approach
       </h1>
-      Well I sure hope Mark Zuckerberg thinks these are bad and tries to fix it clown face
 
-      Sometimes this works!
+      <p>
+         &#8220;Well I sure hope [insert CEO] has our best interest at heart! 🤡&#8221;
+      </p>
 
-      But sometimes these companies knowingly perpetuate design patterns they know literally kill.
+      <br>
+
+      <a href="https://www.wsj.com/articles/the-facebook-files-11631713039">
+        <div class="flex-container delayed-children">
+          <div class="flex-item">
+            <img src="media/wsj0.png"/>
+          </div>
+          <div class="flex-item">
+            <img src="media/wsj1.png"/>
+          </div>
+          <div class="flex-item">
+            <img src="media/wsj2.png"/>
+          </div>
+        </div>
+      </a>
     </article>
 
     <article class="slide delay">
@@ -57,15 +155,43 @@
         Democratic Approach
       </h1>
 
-      Rally around a cause "I want an edit button!"
-      Force the existing applications to change, through public support, 
+      Rally around a cause and through petitions, legislation or boycotting get the company to change!
 
-      This is possible: e.g. EU law on privacy.
+      This can work! <i>E.g.</i> EU privacy law.
 
-      democratic processes are
-      - slow
-      - coarse
-      - biased
+      <p>
+        But often democratic processes can be
+        <span class="cite">
+          <a href="https://www.penguinrandomhouse.com/books/645360/against-elections-by-david-van-reybrouck/">
+            📖
+          </a>
+        </span>:
+        <ul class="delayed-children">
+          <li>
+            Slow
+          </li>
+          <li>
+            Coarse
+          </li>
+          <li>
+            Biased
+          </li>
+        </ul>
+      </p>
+    </article>
+
+    <article class="slide">
+      <h1>
+        Graffiti
+      </h1>
+      
+      <p>
+        An infrastructure that let's people use whatever interfaces, filters, algorithms, moderators and broadcast patterns they want <strong>without losing data or breaking social ties</strong>.
+      </p>
+
+      <p>
+        Clarification: Graffiti does not integrate <i>existing</i> platforms, it is an entirely new ecosystem. 
+      </p>
     </article>
 
     <article class="slide">
@@ -73,60 +199,63 @@
         Anarchist Approach
       </h1>
 
-      Let people use whatever interfaces, filters, algorithms, moderators and broadcast patterns they want!
+      <p>
+        Make whatever social application you want!
 
-      "Ok, but no one is <i>forcing</i> me to use [insert oppressive social application... Isn't that already the case?"
+        People can make small or large changes.
+        Changes
+      </p>
     </article>
 
-    <article class="slide">
-      <h1>
-        Network Effect
-      </h1>
-
-      If you leave you will have no friends.
-    </article>
-
-    <article class="slide">
-      What if were possible for many applications to share the same infrastructure so that by leaving you 
+    <article>
+      What does this look like? Anything?
     </article>
 
 
     <article class="slide">
-      <h1>Even a social network in a slideshow...</h1>
+      <h1>How about a social network in a slideshow...</h1>
       <graffiti-app data='{"editing": false}'>
-        <graffiti-collection v-slot="name"
-          :query="{
-            type: 'description',
-            subject: graffiti.myID,
-            descriptor: 'name',
-            description: {'$type': 'string'},
-            _by: graffiti.myID
-          }">
-          Whats your name?
-          <template v-if="editing">
-            <input :value="editText">
-            <button @click="editing=false">
-              save
-            </button>
-          </template>
-          <template v-else>
-            <template v-if="name.object">
-              {{name.object.object}}
+          <graffiti-collection v-slot="name"
+            :query="{
+              type: 'description',
+              subject: graffiti.myID,
+              descriptor: 'name',
+              description: {'$type': 'string'},
+              _by: graffiti.myID
+            }">
+        <div class="delayed">
+            My name is:
+            <template v-if="editing">
+              <input v-model="editName">
+              <button @click="name.update({
+                type: 'description',
+                subject: graffiti.myID,
+                descriptor: 'name',
+                description: editName,
+                _by: graffiti.myID
+              });editing=false">
+                save
+              </button>
             </template>
             <template v-else>
-              It looks like you don't have a name!
+              <template v-if="name.object">
+                {{name.object.description}}
+              </template>
+              <template v-else>
+                It looks like you don't have a name!
+              </template>
+              <button @click="editing=true">
+                edit me!
+              </button>
             </template>
-            <button @click="editing=true">
-              edit me!
-            </button>
-          </template>
-        </graffiti-collection>
+        </div>
+          </graffiti-collection>
       </graffiti-app>
     </article>
 
     <article class="slide">
       <graffiti-app>
-        Say hello!
+        Do you have any questions so far?
 
         <graffiti-collection v-slot="posts"
           :query="{
@@ -154,6 +283,21 @@
 
           <ul>
             <li v-for="post in posts.objects" :key="post._id">
+              <graffiti-collection v-slot="name"
+                :query="{
+                  type: 'description',
+                  subject: graffiti.myID,
+                  descriptor: 'name',
+                  description: {'$type': 'string'},
+                  _by: graffiti.myID
+                }">
+                <template v-if="name.object">
+                  {{name.object.description}}
+                </template>
+                <template v-else>
+                  Anonymous
+                </template>
+              <graffiti-collection>
 
               {{post.content}}
 
@@ -197,66 +341,167 @@
       </graffiti-app>
     </article>
 
-    <article class="demo slide" id="livedemo">
-      <textarea class="language-html">
-        <graffiti-app>
-          <graffiti-collection v-slot="posts"
-            :query="{
-              type: 'Post',
-              content: { '$type': 'string' },
-              tags: 'chi'
-            }"
-            :page-size="20"
-            :live="true" >
+  <header class="slide">
+    <h1>
+      What is social media?
+    </h1>
+    Social data in Graffiti is composed of independent objects
 
-            <ul>
-              <li v-for="post in posts.objects">
-                {{post.content}}
-              </li>
-            </ul>
-          </graffiti-collection>
-        </graffiti-app>
-      </textarea>
-      <textarea class="language-css">
-        p {
-          font-size: 250%;
-          color: #f06;
-        }
-      </textarea>
-    </article>
+    You can only change your own objects --- moderation, etc. are simple interpretations of the data.
+  </header>
+
+  The issue with such a system is context.
 
   <article class="slide">
-    <h1>So how does this work?</h1>
-    show squiggles
-    follow with moderator example
+    <h1>Design Philosophy</h1>
+
+    Make no assumptions.
+  </article>
+
+  <article class="slide">
+    <h1>Design Overview</h1>
+
+    <ul class="delayed-children">
+      <li>
+        Social data is composed of <strong>independent objects</strong> (posts, likes, relationships, etc.) which can be referred to by unique identifiers.
+      </li>
+      <li>
+        Users can only modify their own objects; moderation and collaboration are <strong>interpretations</strong> of data.
+      </li>
+      <li>
+        Data objects lack an intrinsic schema; norms evolve naturally as a <strong>folksonomy</strong>.
+      </li>
+      <li>
+        Data objects have no extrinsic organization; collections of objects are built from <strong>queries</strong>.
+      </li>
+      <li>
+        <strong>
+        Contextual boundaries are an intrinsic property of the data.
+        </strong>
+      </li>
+    </ul>
+
+    
+  </article>
+
+  <article class="demo slide" id="livedemo">
+    <textarea class="language-html">
+      <graffiti-app>
+        <graffiti-collection v-slot="posts"
+          :query="{
+            type: 'post',
+            content: { '$type': 'string' },
+            tags: 'dimacs'
+          }"
+          :page-size="20"
+          :live="true" >
+
+          <ul>
+            <li v-for="post in posts.objects">
+              {{post.content}}
+            </li>
+          </ul>
+        </graffiti-collection>
+      </graffiti-app>
+    </textarea>
+    <textarea class="language-css">
+      p {
+        font-size: 250%;
+        color: #f06;
+      }
+    </textarea>
+  </article>
+
+
+  <article class="slide">
+    <h1>Context</h1>
+
+    <p class="delayed">
+      When we communicate we form mental models of our audience:
+    </p>
+    <ul class="delayed-children">
+      <li>
+        What are these people interested in?
+      </li>
+      <li>
+        What conversational norms do they expect?
+      </li>
+      <li>
+        ...
+      </li>
+    </ul>
+    <p class="delayed">
+      We shape what we say or don't say based on these mental models
+      <span class="cite">
+        <a href="https://www.tandfonline.com/doi/abs/10.1080/08838151.2012.732140">
+          📖
+        </a>
+      </span>.
+    </p>
   </article>
 
   <article class="slide">
     <h1>Context</h1>
 
-    In real life things happen in physical places.
+    <p>
+      We build our mental models from identity cues and <strong>context cues</strong>.
 
-    These places may be public and even contain similar people, by space itself.
+      Online, a context might be defined:
 
-    When I'm at a bar, I implicitly know the people around me also made a choice to come to the bar
-    
-    so they've made an implicit 
-    so they must be expecting the type of activity associated with bar.
+      <ul class="delayed-children">
+        <li>
+          By app: "on twitter", "on facebook"
+        </li>
+        <li>
+          By category: "in a channel", "on a forum", "at #something"
+        </li>
+        <li>
+          In relation other things: "in its comments section", "on my profile"
+        </li>
+        <li>
+          In a hierarchy: "in a thread", "in a directory"
+        </li>
+        <li>
+          In relation to a physical space: "within a radius"
+        </li>
+      </ul>
+    </p>
 
-    Even if these places are public, we act differently they can carry different meaning.
-
-    Church and Bar.
-
-    Online things
-
-    Suppose I'm talking to people under the tag "Paddy's Pub" which is associated with the query
     {
-      type: "post",
-      content: { "$type": "string" },
-      tags: "Paddy's Pub"
+      type: 'post',
+      tags: ['DIMACS']
+      geotag: {
+      }
+      location: '
+      _by: graffiti.myID
     }
 
-    Conversation that goes like:
+
+
+    If I post a photo, how is it possible for me to know who my audience is if they can find it through a query?
+    Maybe they found it because they're my friend and interested in posts by me
+
+    What happens if my notion of hierarchy conflicts with you
+
+    Things can exist in multiple places at once.
+    Sometimes things exist in multiple places at once (multiple hashtags, my twitter comments are also in your twitter feed).
+  </article>
+
+  <article class="slide">
+    A context helps us form a mental model of the people around us: our imagined audience.
+
+
+    When people don't have a context they experience context collapse, many stop engaging.
+  </article>
+
+
+  <article class="slide">
+    
+  By imposing some extrinsic strucure (e.g. a directory structure) you can find counter examples
+  </article>
+
+    </p>
+
 
 
     Now my colleague come's around and look "My Wall" e.g. all the posts by me
@@ -280,11 +525,6 @@
 
     Online things happen in places too.
 
-    By app: "on twitter", "on facebook"
-    By category: "in a channel", "in a forum", "on a subreddit", "on gay TikTok"
-    In relation to other places: "in a comments section", "in a thread" "in a folder"
-    By identity: "on my wall", "@me"
-    By location: "at an event", "in my neighborhood", "in a radius"
 
     Sometimes things happen in multiple places at once, sometime things are in intersecting places.
 
@@ -308,30 +548,52 @@
     <h1>rant/</h1>
   </article>
 
-
   <article class="slide">
-    One way that data could be stored is within a hierarchy.
-    This comment is *within* 
+    <h1>
+      Related Work
+    </h1>
 
+    <ul class="delayed-children">
+      <li>
+        <b>Solid</b>: makes <em>your own</em> data portable but does not break the network effect.
+      </li>
+      <li>
+        <b>ActivityPub</b>: great for communication with specific people or with people on your server. Not great for overlapping or spontaneous communities.
+      </li>
+      <li>
+        <b>Web3</b>:
+        <span class="delayed">
+          lmao
+        </span>
+      </li>
+    </ul>
   </article>
 
-  <!--
-  How does context work
-  Not useful if you're all going to be doing stuff at the same time.
-  Where do you "put" stuff.
-  This is important for the end user.
-  Also important for the speaker - people change what they say based on who their audience is.
-  Let's say I want to create a band people nearby who are interested in music.
-  Often we represent things in hierarchies.
-  Is it first people nearby -> people interested in music.
-  or people interested in music -> people nearby.
-  -->
+  <footer class="slide">
+    <h1>
+      Discussion
+    </h1>
 
-  <article class="slide">
-    How does this compare to Solid? ActivityPub?
-    (good for talk to people *on your server* and for talking to people who you have specific relationships with. conflates hardware and community.)
-    Is this decentralized? Not yet!
-    Does that matter?
+    <ul class="delayed-children">
+      <li>
+        Would this be a haven for hate groups?
+        <span class="delayed">
+          Or would the diverse and overlapping "views" dampen echo chambers?
+        </span>
+      </li>
+      <li>
+        If left to their own devices would people just make social media even <em>more</em> addictive/engaging?
+      </li>
+      <li>
+        Is it possible to decentralize?
+        <span class="delayed">
+          Would a democratically run non-profit suffice?
+        </span>
+      </li>
+      <li>
+        How would a system like this gain adoption?
+      </li>
+    </ul>
   </article>
 </body>
 </html>

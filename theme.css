@@ -7,9 +7,9 @@
 	--color-yellow: hsl(50, 100%, 50%);
 	--color-green: dimgrey;
 	--color-aqua: hsl(190, 100%, 40%);
-	--color1: var(--color-yellow);
-	--color2: var(--color-green);
-	--color3: var(--color-aqua);
+  --color1: lightgrey;
+  --color2: grey;
+  --color3: dimgrey;
 	--accent1: var(--color-aqua);
 	--accent2: var(--color-green);
 	--accent3: var(--color-yellow);
@@ -44,6 +44,10 @@ a {
 	text-decoration-color: hsla(0,0%,100%,.4);
 }
 
+a:hover {
+  text-decoration: underline;
+}
+
 strong, b {
 	font-weight: bold; /* FF is weird */
 }
@@ -52,19 +56,16 @@ strong, b {
 	outline: none;
 }
 
-input:not([type=file]),
-button,
-select {
-	font: inherit;
-	color: inherit;
+.cite {
+	font: 50%/1.5em var(--font-body);
 }
 
-input:not([type]),
-input[type="text"],
-input[type="email"],
-input[type="tel"],
-input[type="url"] {
-	padding: 0 .3em;
+.cite:after {
+  content: "]"
+}
+
+.cite:before {
+  content: "["
 }
 
 code, textarea, pre {
@@ -110,20 +111,20 @@ img {
 	flex-flow: column;
 	align-items: center;
 	justify-content: center;
-  padding: 3rem;
+  padding: 6rem;
 	color: black;
-  background: white;
+  background: rgba(255, 255, 255, 0.95);
 }
 
 header.slide {
 	padding: 20vmin;
-  background: rgba(200, 200, 200, 0.7);
+  background: rgba(255, 255, 255, 0.8);
   background-clip: content-box, padding-box;
 }
 
 @media (max-width: 1024px) {
 	.slide {
-		padding: 10vmin;
+		padding: 30vmin;
 	}
 }
 
@@ -271,6 +272,10 @@ blockquote {
 	opacity: .7;
 }
 
+.delayed.displayed, .delayed-children > .displayed {
+  opacity: 0.4;
+}
+
 .token.property,
 .token.tag,
 .token.boolean,
@@ -312,4 +317,71 @@ blockquote {
 .token.important,
 .token.bold {
 	font-weight: bold;
+}
+
+button,
+input {
+  font: inherit;
+  font-size: 1.5em;
+  padding: 0.5em;
+  -webkit-appearance: none;
+  border-radius: 0;
+}
+
+button,
+input:focus {
+  outline: none;
+}
+
+input[type=text] {
+  min-width: 0;
+  border: 3px solid var(--color2);
+  flex-grow: 4;
+}
+
+button,
+input[type=button],
+input[type=submit] {
+  border: 10px solid;
+  border-top-color: var(--color2);
+  border-left-color: var(--color2);
+  border-right-color: black;
+  border-bottom-color: black;
+  background-color: var(--color3);
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  flex-grow: 1;
+  white-space: normal;
+}
+
+button,
+input[type=submit]:active,
+input[type=button]:active {
+  border-top-color: black;
+  border-left-color: black;
+  border-right-color: var(--color2);
+  border-bottom-color: var(--color2);
+}
+
+button,
+input[type=submit]:hover,
+input[type=button]:hover {
+  color: var(--color1);
+}
+
+.flex-container {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: nowrap;
+	align-items: center;
+	justify-content: center;
+}
+
+
+.flex-item {
+  flex-grow: 1;
+  line-height: 0;
+  padding: 1vmin;
 }
