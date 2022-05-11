@@ -6,7 +6,7 @@
 
   <!-- Graffiti Dependencies --> 
   <script src="https://unpkg.com/vue@3.2.31/dist/vue.global.prod.js"></script>
-  <script type="module" src="external/graffiti-tools/vue.js"></script>
+  <script type="module" src="https://sportdeath.github.io/graffiti-tools/vue.js"></script>
 
   <!-- Slide Dependencies -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/blissfuljs/1.0.6/bliss.shy.min.js"></script>
@@ -108,75 +108,44 @@
   </article>
 
   <article class="slide delay">
-    <p>
-      So why are most people still using bad interfaces?
-    </p>
+    <h1>
+      So why are most people still using bad applications?
+    </h1>
+    <h2 class="delayed">
+      It's what their friends use.
+    </h2>
     <p class="delayed">
-      Because that's what all of their friends are using.
-      (The network effect).
+      (Network Lock-In)
     </p>
   </article>
 
-  So how do we overcome this?
-
-  Amass a large following.
-  Either create a new platform or create legislation that will modify existing platforms.
-
-  Very slow, coarse, 
-  Try and change the existing platforms.
-  
-      <h1>
-        Benevolent CEO Approach
-      </h1>
-
-      <p>
-         &#8220;Well I sure hope [insert CEO] has our best interest at heart! 🤡&#8221;
-      </p>
-
-      <br>
-
-      <a href="https://www.wsj.com/articles/the-facebook-files-11631713039">
-        <div class="flex-container delayed-children">
-          <div class="flex-item">
-            <img src="media/wsj0.png"/>
-          </div>
-          <div class="flex-item">
-            <img src="media/wsj1.png"/>
-          </div>
-          <div class="flex-item">
-            <img src="media/wsj2.png"/>
-          </div>
-        </div>
-      </a>
-    </article>
+  <header class="slide">
+    <h1>
+      What can we do about lock-in?
+    </h1>
+  </header>
 
     <article class="slide delay">
       <h1>
-        Democratic Approach
+        Socialist Approach
       </h1>
 
-      Rally around a cause and through petitions, legislation or boycotting get the company to change!
+      <h2>
+        Overcome network lock-in with collective action.
+      </h2>
 
-      This can work! <i>E.g.</i> EU privacy law.
+      <ul class="delayed-children">
+        <li>
+          Write petitions or legislation that will change existing platforms.
+        </li>
+        <li>
+          Create an entirely new platform and convince everyone to switch.
+        </li>
+      </ul>
 
-      <p>
-        But often democratic processes can be
-        <span class="cite">
-          <a href="https://www.penguinrandomhouse.com/books/645360/against-elections-by-david-van-reybrouck/">
-            📖
-          </a>
-        </span>:
-        <ul class="delayed-children">
-          <li>
-            Slow
-          </li>
-          <li>
-            Coarse
-          </li>
-          <li>
-            Biased
-          </li>
-        </ul>
+      <p class="delayed">
+      Very slow<sup><a href="https://www.penguinrandomhouse.com/books/645360/against-elections-by-david-van-reybrouck/">1</a></sup>
+        and takes sustained collective effort: only for large changes.
       </p>
     </article>
 
@@ -186,7 +155,8 @@
       </h1>
       
       <p>
-        An infrastructure that let's people use whatever interfaces, filters, algorithms, moderators and broadcast patterns they want <strong>without losing data or breaking social ties</strong>.
+      Infrastucure that you can build social applications on top of
+        Use whatever interfaces, filters, algorithms, moderators and broadcast patterns they want <strong>without losing data or breaking social ties</strong>.
       </p>
 
       <p>
@@ -200,21 +170,23 @@
       </h1>
 
       <p>
-        Make whatever social application you want!
+        Use whatever interfaces, filters, algorithms, moderators and broadcast patterns you want, no approval/agreement necessary!
 
-        People can make small or large changes.
-        Changes
+        So long as there is some overlap in features with other ones, you won't be isolated.
+
+        The ecosystem can freely and rapidly evolve.
       </p>
     </article>
 
-    <article>
-      What does this look like? Anything?
-    </article>
+    <header class="slide">
+      <h1>
+      What does this look like?
+      </h1>
+    </header>
 
-
-    <article class="slide">
+    <article class="slide" id="login">
       <h1>How about a social network in a slideshow...</h1>
-      <graffiti-app data='{"editing": false}'>
+      <graffiti-app data='{"editing": false}' class="delayed">
           <graffiti-collection v-slot="name"
             :query="{
               type: 'description',
@@ -223,43 +195,48 @@
               description: {'$type': 'string'},
               _by: graffiti.myID
             }">
-        <div class="delayed">
-            My name is:
-            <template v-if="editing">
-              <input v-model="editName">
-              <button @click="name.update({
-                type: 'description',
-                subject: graffiti.myID,
-                descriptor: 'name',
-                description: editName,
-                _by: graffiti.myID
-              });editing=false">
-                save
-              </button>
-            </template>
-            <template v-else>
-              <template v-if="name.object">
-                {{name.object.description}}
+            <div class="delayed">
+              My name is:
+              <template v-if="editing">
+                <input v-model="editName" class="fixed-field">
+                <button @click="name.update({
+                  type: 'description',
+                  subject: graffiti.myID,
+                  descriptor: 'name',
+                  description: editName,
+                  _by: graffiti.myID
+                });editing=false">
+                  ✅
+                </button>
               </template>
               <template v-else>
-                It looks like you don't have a name!
+                <span class="fixed-field">
+                  <template v-if="name.object&&name.object.description">
+                      {{name.object.description}}
+                  </template>
+                  <template v-else>
+                    anonymous
+                  </template>
+                </span>
+                <button @click="editName=(name.object?name.object.description:'');editing=true">
+                  ✏️
+                </button>
               </template>
-              <button @click="editing=true">
-                edit me!
-              </button>
-            </template>
-        </div>
+            </div>
           </graffiti-collection>
       </graffiti-app>
     </article>
 
     <article class="slide">
       <graffiti-app>
+
+        <h1>
         Do you have any questions so far?
+        </h1>
 
         <graffiti-collection v-slot="posts"
           :query="{
-            type: 'Post',
+            type: 'post',
             content: { '$type': 'string' },
             tags: 'dimacs'
           }"
@@ -267,7 +244,7 @@
           :live="true" >
 
           <form @submit.prevent="posts.update({
-            type: 'Post', 
+            type: 'post', 
             content: postContent,
             tags: ['dimacs'],
             _contexts: [{
@@ -277,80 +254,88 @@
             }],
             _by: graffiti.myID
           }); postContent=''">
-            <input v-model="postContent" />
-            <input type="submit" value="post" />
+            <div class="flex-container">
+              <input v-model="postContent" class="flex-item"/>
+            </div>
+            <div style="text-align: right">
+              <input type="submit" value="post" />
+            </div>
           </form>
 
-          <ul>
-            <li v-for="post in posts.objects" :key="post._id">
-              <graffiti-collection v-slot="name"
-                :query="{
-                  type: 'description',
-                  subject: graffiti.myID,
-                  descriptor: 'name',
-                  description: {'$type': 'string'},
-                  _by: graffiti.myID
-                }">
-                <template v-if="name.object">
-                  {{name.object.description}}
-                </template>
-                <template v-else>
-                  Anonymous
-                </template>
-              <graffiti-collection>
+          <hr>
 
-              {{post.content}}
+          <div class="post-list">
+            <div v-for="post in posts.objects" :key="post._id" class="post">
+              <div class="post-line" style="font-weight: bold;">
+                <graffiti-collection v-slot="name"
+                  :query="{
+                    type: 'description',
+                    subject: graffiti.myID,
+                    descriptor: 'name',
+                    description: {'$type': 'string'},
+                    _by: graffiti.myID
+                  }"
+                  :live="true">
+                  <template v-if="name.object">
+                    {{name.object.description}}
+                  </template>
+                  <template v-else>
+                    Anonymous
+                  </template>
+                <graffiti-collection>
+              </div>
 
-              <graffiti-collection v-slot="likes"
-                :query="{
-                  type: 'Like',
-                  at: post._id,
-                  _by: { '$exists': 'true' }
-                }"
-                :page-size="100"
-                :live="true" >
+              <div class="post-line">
+                {{post.content}}
+              </div>
 
-                {{likes.objects.length}}
-
-                <template v-if="!likes.objects.filter(l => l._by==graffiti.myID).length">
-                  <button @click="likes.update({
-                    type: 'Like',
+              <div class="post-line">
+                <graffiti-collection v-slot="likes"
+                  :query="{
+                    type: 'like',
                     at: post._id,
-                    _by: graffiti.myID,
-                    _contexts: [{
-                      _nearMisses: [{
-                        at: 'not' + post._id
-                      }]
-                    }]
-                  })">like</button>
-                </template>
-                <template v-else>
-                  <button @click="likes.delete(likes.objects.filter(l => l._by==graffiti.myID)[0]._id)">
-                    unlike
-                  </button>
-                </template>
+                    _by: { '$exists': 'true' }
+                  }"
+                  :page-size="100"
+                  :live="true" >
 
-              </graffiti-collection>
+                  {{likes.objects.length}}
+
+                  <template v-if="!likes.objects.filter(l => l._by==graffiti.myID).length">
+                    <button @click="likes.update({
+                      type: 'like',
+                      at: post._id,
+                      _by: graffiti.myID,
+                      _contexts: [{
+                        _nearMisses: [{
+                          at: 'not' + post._id
+                        }]
+                      }]
+                    })">like</button>
+                  </template>
+                  <template v-else>
+                    <button @click="likes.delete(likes.objects.filter(l => l._by==graffiti.myID)[0]._id)">
+                      unlike
+                    </button>
+                  </template>
+
+                </graffiti-collection>
 
               <template v-if="post._by==graffiti.myID">
                 <button @click="posts.delete(post._id)">delete</button>
               </template>
-            </li>
-          </ul>
+              </div>
+            </div>
+          </div>
         </graffiti-collection>
       </graffiti-app>
     </article>
 
   <header class="slide">
     <h1>
-      What is social media?
+      How does this all work?
     </h1>
-    Social data in Graffiti is composed of independent objects
-
-    You can only change your own objects --- moderation, etc. are simple interpretations of the data.
   </header>
-
-  The issue with such a system is context.
 
   <article class="slide">
     <h1>Design Philosophy</h1>
@@ -396,19 +381,15 @@
           :page-size="20"
           :live="true" >
 
-          <ul>
-            <li v-for="post in posts.objects">
+          <ul class="post-list">
+            <li v-for="post in posts.objects" :key="post._id">
               {{post.content}}
+
+              <!-- TODO: only show posts w/ > 2 likes -->
             </li>
           </ul>
         </graffiti-collection>
       </graffiti-app>
-    </textarea>
-    <textarea class="language-css">
-      p {
-        font-size: 250%;
-        color: #f06;
-      }
     </textarea>
   </article>
 
@@ -466,26 +447,13 @@
         </li>
       </ul>
     </p>
-
-    {
-      type: 'post',
-      tags: ['DIMACS']
-      geotag: {
-      }
-      location: '
-      _by: graffiti.myID
-    }
-
-
-
-    If I post a photo, how is it possible for me to know who my audience is if they can find it through a query?
-    Maybe they found it because they're my friend and interested in posts by me
-
-    What happens if my notion of hierarchy conflicts with you
-
-    Things can exist in multiple places at once.
-    Sometimes things exist in multiple places at once (multiple hashtags, my twitter comments are also in your twitter feed).
   </article>
+
+  <header class="slide">
+    <h1>
+      How can we preserve context when your data could show up in many queries?
+    </h1>
+  </header>
 
   <article class="slide">
     A context helps us form a mental model of the people around us: our imagined audience.
@@ -494,58 +462,10 @@
     When people don't have a context they experience context collapse, many stop engaging.
   </article>
 
-
-  <article class="slide">
-    
-  By imposing some extrinsic strucure (e.g. a directory structure) you can find counter examples
-  </article>
-
-    </p>
-
-
-
-    Now my colleague come's around and look "My Wall" e.g. all the posts by me
-
-    {
-      type: "Post",
-      _by: [My ID]
-    }
-
-      content: "yoooooooooooo let's do shots"
-      tags: ["Paddy's Pub"]
-
-    Some recruiter come's
-
-
-
-
-
-    "at school", "at work".
-    Even if places are public, they carry different meaning.
-
-    Online things happen in places too.
-
-
-    Sometimes things happen in multiple places at once, sometime things are in intersecting places.
-
-    In a system where you can just query for whatever you want, how can I make sure?
-  </article>
-
   <article class="slide">
     <h1>
-      Context is often a <i>crucial</i> but <i>invisible</i> design element of a social space.
+      Why is this titled Graffiti?
     </h1>
-  </article>
-
-  <article class="slide">
-    <h1>
-      \rant: why I don't use Twitter
-    </h1>
-
-    When you interact with twitter, either by commenting or liking something, those actions can be shared with all of your twitter followers.
-    I follow a bunch of different people on twitter and if my academic friends interacted with my queer friends that would be fine, but I'm not going out of my way to say "look how gay I am.
-
-    <h1>rant/</h1>
   </article>
 
   <article class="slide">
@@ -597,3 +517,24 @@
   </article>
 </body>
 </html>
+    Anarchism: reject all formal hierarchies
+
+    {
+      type: 'post',
+      tags: ['DIMACS']
+      geotag: {
+      }
+      location: '
+      _by: graffiti.myID
+    }
+
+
+
+    If I post a photo, how is it possible for me to know who my audience is if they can find it through a query?
+    Maybe they found it because they're my friend and interested in posts by me
+
+    What happens if my notion of hierarchy conflicts with you
+
+    Things can exist in multiple places at once.
+    Sometimes things exist in multiple places at once (multiple hashtags, my twitter comments are also in your twitter feed).
+  </article>
