@@ -360,6 +360,7 @@
     </h1>
   </header>
 
+
   <article class="slide">
     <h1>Our Design</h1>
 
@@ -372,6 +373,7 @@
       </li>
       <li>
         Data objects lack an intrinsic schema; norms evolve naturally as a <strong>folksonomy</strong>.
+        <span class="delayed">(Like <a href="https://www.w3.org/TR/activitystreams-core/">Activity Streams</a>).</span>
       </li>
       <li>
         Data objects have no extrinsic organization; collections of objects are built from <strong>queries</strong>.
@@ -421,7 +423,7 @@
         Subscribe to moderators just like you subscribe to posts!
       </li>
       <li>
-        You could might give moderation power to friends, community leaders or <span class="quote">public options</span>.
+        You could give moderation power to friends, community leaders or <span class="quote">public options</span>.
       </li>
       <li>
         Maybe you'll use a system like PolicyKit!
@@ -429,11 +431,13 @@
     </ul>
   </article>
 
-  <article class="slide">
-    <h1>Mental Models</h1>
+  <header class="slide">
+    <h1>Context and Collapse</h1>
+  </header>
 
+  <article class="slide" id="mental-models">
     <p class="delayed">
-      When we communicate we form mental models of our audience:
+      When we communicate we form <strong>mental models</strong> of our audience:
     </p>
     <ul class="delayed-children">
       <li>
@@ -443,8 +447,10 @@
         What conversational norms do they expect?
       </li>
     </ul>
-    <p class="delayed">
-    We shape <strong>what we say</strong> based on these models <span class="delayed">and we form our models from <strong>context cues</strong></span>.
+    <p class="delayed" style="padding-top:1em;">
+      We shape <strong>what we say</strong> based on these models
+      <br>
+    <span class="delayed">and we form our models from <strong>context cues</strong>.</span>
     </p>
   </article>
 
@@ -485,17 +491,25 @@
       But what is a <span class="quote">place</span> when data can show up in many queries?
     </h1>
 
+    <h2 class="delayed">
+      Context Collapse!
+    </h2>
+
     <p class="delayed">
       When people experience <strong>context collapse</strong>
       they can either overly censor themselves or end up annoying and being censored by other people<sup><a href="https://www.tandfonline.com/doi/abs/10.1080/08838151.2012.732140">1</a></sup>.
     </p>
 
     <p class="delayed">
-      (This is already a problem!)
+      This is already a problem!
     </p>
 
     <p class="delayed">
-      Do we need to add some sort of extrinsic organization?
+      By collapsing everything onto one infrastructure it could get a lot worse!
+    </p>
+
+    <p class="delayed">
+      Do we need some fixed extrinsic organization of objects?
     </p>
   </article>
 
@@ -504,7 +518,7 @@
       Context as an Intrinsic Property
     </h1>
 
-    <span class="quote">I only want people to see my post if they are specifically looking for...</span>
+    <span class="quote delayed">I only want people to see my post if they are specifically looking for...</span>
 
     <ul class="delayed-children">
       <li>
@@ -527,7 +541,7 @@
     </h1>
 
     <p>
-      <span class="quote">I only want people to see this if their query is sufficiently specific</span>
+      <span class="quote">I only want people to see my post if their query is sufficiently specific.</span>
     </p>
 
     <p class="delayed">
@@ -566,7 +580,7 @@
 
   <article class="slide">
     <h1>
-      Representation with "Near Misses"
+      Representing Context with<br> <a href="https://www.youtube.com/watch?v=sh3EPjhhd40"><span class="quote">Near Misses</span></a>
     </h1>
 
     [include picture]
@@ -599,8 +613,7 @@
       </li>
       <li>
         <b>Web3</b>:
-        <span class="delayed">
-        </span>
+        something isn't necessarily better just because it's decentralized.
       </li>
     </ul>
   </article>
@@ -634,6 +647,12 @@
       </li>
       <li>
         How would a system like this gain adoption?
+        <span class="delayed">
+          If you want to try this out, email me!
+          <tt>
+            theia＠mit.edu
+          </tt>
+        </span>
       </li>
     </ul>
   </article>
