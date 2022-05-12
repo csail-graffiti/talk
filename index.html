@@ -679,8 +679,8 @@
     <graffiti-app data='{"by": {"$exists": true}, "inReplyTo": {"$exists": true}, "tags": [], "post": {"_by": "ff30f6c3-9f85-5565-82a1-7458a1d41d4e", "content": "this is cool!", "inReplyTo": "coolarticle", "tags": ["cs", "law"]}, "id": ""}'>
 
       <graffiti-collection v-slot="poster" :query="post">
-        <div class="flex-container" style="text-align:left">
-          <div class="flex-item" style="line-height: 1em">
+        <div class="flex-container" style="text-align:left; flex-grow:1">
+          <div class="flex-item" style="line-height: 1em; flex-grow:2">
             <p>
               Post
             </p>
@@ -696,11 +696,13 @@
             <p style="padding-bottom:1em">
               with near miss(es):
             </p>
+            <br>
             <button @click="poster.update(post)" class="missbutton">
               <pre>
 {}
               </pre>
             </button>
+            <br>
             <button @click="
               const copy=Object.assign({},post);
               const miss=Object.assign({},post);
@@ -713,6 +715,7 @@
 { _by: 'notme' }
               </pre>
             </button>
+            <br>
             <button @click="
               const copy=Object.assign({},post);
               const miss=Object.assign({},post);
@@ -725,6 +728,7 @@
 { inReplyTo: 'notcoolarticle' }
               </pre>
             </button>
+            <br>
             <button @click="
               const copy=Object.assign({},post);
               const miss=Object.assign({},post);
@@ -741,6 +745,7 @@
 }
               </pre>
             </button>
+            <br>
             <button @click="
               const copy=Object.assign({},post);
               const miss1=Object.assign({},post);
@@ -762,27 +767,42 @@
               </pre>
             </button>
           </div>
-        <div class="flex-container">
-          <div class="flex-item" style="line-height: 1em">
+          <div class="flex-item" style="line-height: 1em; text-align:right;">
+            <div class="context-item">
+            <div class="quote">On my profile</div>
+            </div>
+            <div class="context-item">
+            <div class="quote">In the comments section</div>
+            </div>
+            <div class="context-item">
+            <div class="quote">Under the CS tag</div>
+            </div>
+            <div class="context-item">
+            <div class="quote">Under the law tag</div>
+            </div>
+            <div class="context-item">
+            <div class="quote">In the comments section and under the CS and law tags</div>
+            </div>
+          </div>
+          <div class="flex-item" style="line-height: 1em; flex-grow:0">
+            <div class="context-item">
             <graffiti-collection v-slot="byme"
-              :query="{_by: graffiti.myID }"
+              :query="{ _by: graffiti.myID }"
               :page-size: "0"
               :live="true">
-              <span class="quote">On my profile</span>:
-              <span v-if="byme.object && byme.object._timestamp==poster.object._timestamp">
+              <span v-if="byme.object && byme.object._timestamp == poster.object._timestamp">
                 ✅
               </span>
               <span v-else>
                 ❌
               </span>
             </graffiti-collection>
-          </div>
-          <div class="flex-item" style="line-height: 1em">
+            </div>
+            <div class="context-item">
             <graffiti-collection v-slot="inreply"
               :query="{ inReplyTo: 'coolarticle' }"
               :page-size: "0"
               :live="true">
-              <span class="quote">In the comments section</span>:
               <span v-if="inreply.object && inreply.object._timestamp == poster.object._timestamp">
                 ✅
               </span>
@@ -790,13 +810,12 @@
                 ❌
               </span>
             </graffiti-collection>
-          </div>
-          <div class="flex-item" style="line-height: 1em">
+            </div>
+            <div class="context-item">
             <graffiti-collection v-slot="cs"
               :query="{ tags: 'cs' }"
               :page-size: "0"
               :live="true">
-              <span class="quote">Under the CS tag</span>:
               <span v-if="cs.object && cs.object._timestamp == poster.object._timestamp">
                 ✅
               </span>
@@ -804,13 +823,12 @@
                 ❌
               </span>
             </graffiti-collection>
-          </div>
-          <div class="flex-item" style="line-height: 1em">
+            </div>
+            <div class="context-item">
             <graffiti-collection v-slot="law"
               :query="{ tags: 'law' }"
               :page-size: "0"
               :live="true">
-              <span class="quote">Under the law tag</span>:
               <span v-if="law.object && law.object._timestamp == poster.object._timestamp">
                 ✅
               </span>
@@ -818,13 +836,12 @@
                 ❌
               </span>
             </graffiti-collection>
-          </div>
-          <div class="flex-item" style="line-height: 1em">
+            </div>
+            <div class="context-item">
             <graffiti-collection v-slot="all"
               :query="{ inReplyTo: 'coolarticle', tags: { '$all': ['law', 'cs'] } }"
               :page-size: "0"
               :live="true">
-              <span class="quote">In the comments section and under the CS and law tags</span>:
               <span v-if="all.object && all.object._timestamp == poster.object._timestamp">
                 ✅
               </span>
@@ -832,7 +849,7 @@
                 ❌
               </span>
             </graffiti-collection>
-          </div>
+            </div>
         </div>
       </graffiti-collection>
     </graffiti-app>

@@ -487,7 +487,13 @@ graffiti-app {
 }
 
 .missbutton {
-  width: 40vw;
+  width: 100%;
   text-align: left;
   justify-content: left;
+}
+
+.context-item {
+  text-align: right;
+  height: 5vh;
+  padding: 1vh;
 }
