@@ -579,6 +579,12 @@
     </div>
   </article>
 
+  <header class="slide">
+    <h1>
+      How can we describe <span class="quote">sufficiently specific</span> queries?
+    </h1>
+  </header>
+
   <article class="slide">
     <h1>
       Representing Context with<br> <a href="https://www.youtube.com/watch?v=sh3EPjhhd40"><span class="quote">Near Misses</span></a>
@@ -669,9 +675,167 @@
     </p>
   </article>
 
-  <article class="demo slide" id="context-demo">
-    <textarea class="language-html">
-    </textarea>
+  <article class="slide" id="context-demo">
+    <graffiti-app data='{"by": {"$exists": true}, "inReplyTo": {"$exists": true}, "tags": [], "post": {"_by": "ff30f6c3-9f85-5565-82a1-7458a1d41d4e", "content": "this is cool!", "inReplyTo": "coolarticle", "tags": ["cs", "law"]}, "id": ""}'>
+
+      <graffiti-collection v-slot="poster" :query="post">
+        <div class="flex-container" style="text-align:left">
+          <div class="flex-item" style="line-height: 1em">
+            <p>
+              Post
+            </p>
+              <pre>
+                {
+                  type: 'post',
+                  _by: graffiti.myID,
+                  content: 'this is cool!'
+                  inReplyTo: 'coolarticle',
+                  tags: ['cs', 'law']
+                }
+              </pre>
+            <p style="padding-bottom:1em">
+              with near miss(es):
+            </p>
+            <button @click="poster.update(post)" class="missbutton">
+              <pre>
+{}
+              </pre>
+            </button>
+            <button @click="
+              const copy=Object.assign({},post);
+              const miss=Object.assign({},post);
+              miss._by = 'notme';
+              copy._contexts = [{
+                nearMisses: [miss]
+              }]
+              poster.update(copy)" class="missbutton">
+              <pre>
+{ _by: 'notme' }
+              </pre>
+            </button>
+            <button @click="
+              const copy=Object.assign({},post);
+              const miss=Object.assign({},post);
+              miss.inReplyTo = 'notcoolarticle';
+              copy._contexts = [{
+                nearMisses: [miss]
+              }]
+              poster.update(copy)" class="missbutton">
+              <pre>
+{ inReplyTo: 'notcoolarticle' }
+              </pre>
+            </button>
+            <button @click="
+              const copy=Object.assign({},post);
+              const miss=Object.assign({},post);
+              miss.inReplyTo = 'notcoolarticle';
+              miss.tags = ['notcs', 'notlaw'];
+              copy._contexts = [{
+                nearMisses: [miss]
+              }];
+              poster.update(copy)" class="missbutton">
+              <pre>
+{
+  inReplyTo: 'notcoolarticle'
+  tags: ['notcs', 'notlaw']
+}
+              </pre>
+            </button>
+            <button @click="
+              const copy=Object.assign({},post);
+              const miss1=Object.assign({},post);
+              const miss2=Object.assign({},post);
+              const miss3=Object.assign({},post);
+              miss1.inReplyTo = 'notcoolarticle';
+              miss2.tags = ['notcs', 'law'];
+              miss3.tags = ['notlaw', 'cs'];
+              copy._contexts = [{
+                nearMisses: [miss1, miss2, miss3]
+              }]
+              poster.update(copy)" class="missbutton">
+              <pre>
+[
+  { inReplyTo: 'notcoolarticle' },
+  { tags: ['cs', 'notlaw'] },
+  { tags: ['notcs', 'law'] }
+]
+              </pre>
+            </button>
+          </div>
+        <div class="flex-container">
+          <div class="flex-item" style="line-height: 1em">
+            <graffiti-collection v-slot="byme"
+              :query="{_by: graffiti.myID }"
+              :page-size: "0"
+              :live="true">
+              <span class="quote">On my profile</span>:
+              <span v-if="byme.object && byme.object._timestamp==poster.object._timestamp">
+                ✅
+              </span>
+              <span v-else>
+                ❌
+              </span>
+            </graffiti-collection>
+          </div>
+          <div class="flex-item" style="line-height: 1em">
+            <graffiti-collection v-slot="inreply"
+              :query="{ inReplyTo: 'coolarticle' }"
+              :page-size: "0"
+              :live="true">
+              <span class="quote">In the comments section</span>:
+              <span v-if="inreply.object && inreply.object._timestamp == poster.object._timestamp">
+                ✅
+              </span>
+              <span v-else>
+                ❌
+              </span>
+            </graffiti-collection>
+          </div>
+          <div class="flex-item" style="line-height: 1em">
+            <graffiti-collection v-slot="cs"
+              :query="{ tags: 'cs' }"
+              :page-size: "0"
+              :live="true">
+              <span class="quote">Under the CS tag</span>:
+              <span v-if="cs.object && cs.object._timestamp == poster.object._timestamp">
+                ✅
+              </span>
+              <span v-else>
+                ❌
+              </span>
+            </graffiti-collection>
+          </div>
+          <div class="flex-item" style="line-height: 1em">
+            <graffiti-collection v-slot="law"
+              :query="{ tags: 'law' }"
+              :page-size: "0"
+              :live="true">
+              <span class="quote">Under the law tag</span>:
+              <span v-if="law.object && law.object._timestamp == poster.object._timestamp">
+                ✅
+              </span>
+              <span v-else>
+                ❌
+              </span>
+            </graffiti-collection>
+          </div>
+          <div class="flex-item" style="line-height: 1em">
+            <graffiti-collection v-slot="all"
+              :query="{ inReplyTo: 'coolarticle', tags: { '$all': ['law', 'cs'] } }"
+              :page-size: "0"
+              :live="true">
+              <span class="quote">In the comments section and under the CS and law tags</span>:
+              <span v-if="all.object && all.object._timestamp == poster.object._timestamp">
+                ✅
+              </span>
+              <span v-else>
+                ❌
+              </span>
+            </graffiti-collection>
+          </div>
+        </div>
+      </graffiti-collection>
+    </graffiti-app>
   </article>
 
   <article class="slide">

@@ -327,7 +327,6 @@ blockquote {
 button,
 input {
   font: inherit;
-  -webkit-appearance: none;
   border-radius: 0;
 }
 
@@ -485,4 +484,10 @@ graffiti-app {
   min-height: 30vh;
   border: 3px solid lightskyblue;
   border-radius: 50%;
+}
+
+.missbutton {
+  width: 40vw;
+  text-align: left;
+  justify-content: left;
 }
