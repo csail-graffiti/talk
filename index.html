@@ -65,7 +65,7 @@
     <span class="delayed">Can we do better?</span>
   </article>
 
-  <article id="social-media-bad" class="slide delay">
+  <article class="slide delay">
     <h1>
       Yes!
     </h1>
@@ -96,7 +96,7 @@
     </div>
   </article>
 
-  <article id="social-media-bad" class="slide delay">
+  <article class="slide delay">
     <h1>
       Individual and Community Design Too!
     </h1>
@@ -584,7 +584,89 @@
       Representing Context with<br> <a href="https://www.youtube.com/watch?v=sh3EPjhhd40"><span class="quote">Near Misses</span></a>
     </h1>
 
-    [include picture]
+    <div class="point-container delayed-children">
+      <div class="point-item">
+        <pre style="text-align: left">
+          {
+            type: 'post',
+            content: 'hello world!',
+            tags: ['graffiti']
+          }
+        </pre>
+        <div class="point"></div>
+      </div>
+
+      <div class="point-item">
+        <pre style="text-align: left">
+          {
+            type: 'post',
+            content: 'hello world!',
+            tags: [<span style="color:red">'notgraffiti'</span>]
+          }
+        </pre>
+        <div class="point"></div>
+      </div>
+    </div>
+
+    <div class="big-query delayed"></div>
+
+    <div class="point-container delayed-children">
+      <div class="point-item">
+        ✅
+      </div>
+      <div class="point-item">
+        ✅
+      </div>
+    </div>
+    <p class="delayed">
+      ❌ Don't return the post
+    </p>
+  </article>
+
+  <article class="slide">
+    <h1>
+      Representing Context with<br> <a href="https://www.youtube.com/watch?v=sh3EPjhhd40"><span class="quote">Near Misses</span></a>
+    </h1>
+
+    <div class="point-container">
+      <div class="point-item">
+        <pre style="text-align: left">
+          {
+            type: 'post',
+            content: 'hello world!',
+            tags: ['graffiti']
+          }
+        </pre>
+        <div class="point"></div>
+      </div>
+
+      <div class="point-item">
+        <pre style="text-align: left">
+          {
+            type: 'post',
+            content: 'hello world!',
+            tags: [<span style="color:red">'notgraffiti'</span>]
+          }
+        </pre>
+        <div class="point"></div>
+      </div>
+    </div>
+
+    <div class="small-query-container">
+      <div class="small-query delayed"></div>
+    </div>
+
+    <div class="point-container delayed-children">
+      <div class="point-item">
+        ✅
+      </div>
+      <div class="point-item">
+        ❌
+      </div>
+    </div>
+    <p class="delayed">
+      ✅ Do return the post
+    </p>
   </article>
 
   <article class="demo slide" id="context-demo">
