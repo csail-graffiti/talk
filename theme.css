@@ -386,3 +386,33 @@ graffiti-app {
 .post-line + .post-line {
   padding-top: 0em;
 }
+
+.quote:before {
+  content: "“";
+}
+
+.quote:after {
+  content: "”";
+}
+
+.bubble-container {
+  width: 50%;
+  text-align: left;
+  padding-top: 2em;
+}
+
+.bubble-container + .bubble-container {
+  padding-top: 0em;
+}
+
+.bubble {
+  width: max-content;
+  padding: 0.5em;
+  border-radius: 1.5em;
+  background-color: lightgrey;
+}
+
+.bubble-name {
+  font-size: 80%;
+  font-weight: bold;
+}

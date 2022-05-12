@@ -90,6 +90,9 @@
         <!--</a>-->
       </div>
     </div>
+    <p class="delayed">
+      (of systems from talks earlier in workshop)
+    </p>
   </article>
 
   <article id="social-media-bad" class="slide delay">
@@ -140,7 +143,7 @@
       </h1>
 
       <h2>
-        Overcome network lock-in with collective action.
+        Effect change through collective action.
       </h2>
 
       <ul class="delayed-children">
@@ -153,8 +156,11 @@
       </ul>
 
       <p class="delayed">
-      Very slow<sup><a href="https://www.penguinrandomhouse.com/books/645360/against-elections-by-david-van-reybrouck/">1</a></sup>
-        and takes sustained collective effort: only for large changes.
+        Slow and require sustained collective effort<sup><a href="https://www.penguinrandomhouse.com/books/645360/against-elections-by-david-van-reybrouck/">1</a></sup>
+        <span class="delayed">:
+          <br>
+          often solving problems in the <span class="quote">rear-view mirror</span>.
+        </span>
       </p>
     </article>
 
@@ -182,15 +188,15 @@
       </h1>
 
       <h2>
-        Make change independently or through voluntary collaboration.
+        Effect change independently or through voluntary collaboration.
       </h2>
 
       <ul class="delayed-children">
         <li>
-          Use, design or customize whatever interfaces, filters, algorithms, moderators and broadcast patterns you want, no approval/agreement necessary!
+          Use, design or customize whatever interfaces, filters, algorithms, moderators and broadcast patterns you want!
         </li>
         <li>
-          Many designs can be explored and iterated on in parallel. Fast evolution!
+          Many designs can be explored and iterated on in parallel. <strong>Fast evolution!</strong>
         </li>
       </ul>
     </article>
@@ -380,7 +386,7 @@
     
   </article>
 
-  <article class="demo slide" id="livedemo">
+  <article class="demo slide" id="collection-demo">
     <textarea class="language-html">
       <graffiti-app>
         <graffiti-collection v-slot="posts"
@@ -393,20 +399,38 @@
           :live="true" >
 
           <ul class="post-list">
-            <li v-for="post in posts.objects" :key="post._id">
-              {{post.content}}
+            <template v-for="post in posts.objects" :key="post._id">
+              <!-- TODO: only show posts that I have liked -->
 
-              <!-- TODO: only show posts w/ > 2 likes -->
-            </li>
+              <li>
+                {{post.content}}
+              </li>
+            </template>
           </ul>
         </graffiti-collection>
       </graffiti-app>
     </textarea>
   </article>
 
+  <article class="slide">
+    <h1>
+      Moderation as Interpretation
+    </h1>
+    <ul class="delayed-children">
+      <li>
+        Subscribe to moderators just like you subscribe to posts!
+      </li>
+      <li>
+        You could might give moderation power to friends, community leaders or <span class="quote">public options</span>.
+      </li>
+      <li>
+        Maybe you'll use a system like PolicyKit!
+      </li>
+    </ul>
+  </article>
 
   <article class="slide">
-    <h1>Context</h1>
+    <h1>Mental Models</h1>
 
     <p class="delayed">
       When we communicate we form mental models of our audience:
@@ -420,61 +444,138 @@
       </li>
     </ul>
     <p class="delayed">
-      We shape <strong>what we say or don't say</strong> based on these mental models
-      <sup>
-        <a href="https://www.tandfonline.com/doi/abs/10.1080/08838151.2012.732140">
-          1
-        </a>
-      </sup>.
+    We shape <strong>what we say</strong> based on these models <span class="delayed">and we form our models from <strong>context cues</strong></span>.
     </p>
   </article>
 
   <article class="slide">
     <h1>Context</h1>
 
-    (more coming + demo)
-
-    <!--
-    <p>
-      We build our mental models from identity cues and <strong>context cues</strong>.
-
-      Online, a context might be defined:
+    <p class="delayed">
+      ... an abstract <span class="quote">place</span> and the identities, situations and norms associated with that place.
 
       <ul class="delayed-children">
         <li>
-          By app: "on twitter", "on facebook"
+          App: <span class="quote">on twitter,</span> <span class="quote">on facebook</span>
         </li>
         <li>
-          By category: "in a channel", "on a forum", "at #something"
+          Category: <span class="quote">in a channel,</span> <span class="quote">in a subreddit,</span> <span class="quote">at #graffiti</span>
         </li>
         <li>
-          In relation other things: "in its comments section", "on my profile"
+          Person: <span class="quote">on my profile</span>
         </li>
         <li>
-          In a hierarchy: "in a thread", "in a directory"
+          Content: <span class="quote">in its comments section</span>
         </li>
         <li>
-          In relation to a physical space: "within a radius"
+          Hierarchy: <span class="quote">in a thread,</span> <span class="quote">in a directory</span>
+        </li>
+        <li>
+          Physical space: <span class="quote">within a radius</span>
+        </li>
+        <li>
+          ...
         </li>
       </ul>
     </p>
-    -->
   </article>
-
-  <!--
-  <header class="slide">
-    <h1>
-      How can we preserve context when your data could show up in many queries?
-    </h1>
-  </header>
 
   <article class="slide">
-    A context helps us form a mental model of the people around us: our imagined audience.
+    <h1>
+      But what is a <span class="quote">place</span> when data can show up in many queries?
+    </h1>
 
+    <p class="delayed">
+      When people experience <strong>context collapse</strong>
+      they can either overly censor themselves or end up annoying and being censored by other people<sup><a href="https://www.tandfonline.com/doi/abs/10.1080/08838151.2012.732140">1</a></sup>.
+    </p>
 
-    When people don't have a context they experience context collapse, many stop engaging.
+    <p class="delayed">
+      (This is already a problem!)
+    </p>
+
+    <p class="delayed">
+      Do we need to add some sort of extrinsic organization?
+    </p>
   </article>
-  -->
+
+  <article class="slide">
+    <h1>
+      Context as an Intrinsic Property
+    </h1>
+
+    <span class="quote">I only want people to see my post if they are specifically looking for...</span>
+
+    <ul class="delayed-children">
+      <li>
+        things by me <span class="delayed">→ my profile</span>
+      </li>
+      <li>
+        things that refer to an article 
+        <span class="delayed">→ comments section</span>
+      </li>
+      <li>
+        things with #graffiti
+        <span class="delayed">→ a channel</span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="slide">
+    <h1>
+      Context as an Intrinsic Property
+    </h1>
+
+    <p>
+      <span class="quote">I only want people to see this if their query is sufficiently specific</span>
+    </p>
+
+    <p class="delayed">
+      Smaller queries lead to more data?
+    </p>
+
+    <br>
+
+    <div class="delayed bubble-container">
+      <div class="bubble">
+        How are you?
+      </div>
+      <div class="bubble-name">
+        Alice
+      </div>
+    </div>
+
+    <div class="delayed bubble-container" style="text-align:right">
+      <div class="bubble" style="background-color:lightskyblue;margin-left:auto">
+        Fine.
+      </div>
+      <div class="bubble-name">
+        Bob
+      </div>
+    </div>
+
+    <div class="delayed bubble-container" style="text-align:right">
+      <div class="bubble" style="background-color:lightskyblue;margin-left:auto">
+        When I was first initialized...
+      </div>
+      <div class="bubble-name">
+        Regular Database
+      </div>
+    </div>
+  </article>
+
+  <article class="slide">
+    <h1>
+      Representation with "Near Misses"
+    </h1>
+
+    [include picture]
+  </article>
+
+  <article class="demo slide" id="context-demo">
+    <textarea class="language-html">
+    </textarea>
+  </article>
 
   <article class="slide">
     <h1>
@@ -520,6 +621,12 @@
         If left to their own devices would people just make social media even <em>more</em> addictive/engaging?
       </li>
       <li>
+        Would people remove all healthy friction?
+        <span class="delayed">
+          Is friction a hack we don't need anymore?
+        </span>
+      </li>
+      <li>
         Is it possible to decentralize?
         <span class="delayed">
           Would a democratically run non-profit suffice?
@@ -528,8 +635,6 @@
       <li>
         How would a system like this gain adoption?
       </li>
-      <li>
-        [Point about friction re. Ellen Goodman's talk]
     </ul>
   </article>
 </body>
