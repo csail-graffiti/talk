@@ -29,6 +29,10 @@
     <p class="attribution">Theia Henderson and David Karger</p>
   </header>
 
+  <header id="slides-link" class="slide">
+    <h3>Slides:</h3>
+    <h1>graffiti.csail.mit.edu</h1>
+  </header>
 
   <article id="social-media-bad" class="slide delay">
     Social media today can be:
@@ -262,7 +266,7 @@
           :query="{
             type: 'post',
             content: { '$type': 'string' },
-            tags: 'dimacs'
+            tags: { '$all': ['graffiti', 'dimacs'] }
           }"
           :page-size="10"
           :live="true" >
@@ -270,12 +274,7 @@
           <form @submit.prevent="posts.update({
             type: 'post', 
             content: postContent,
-            tags: ['dimacs'],
-            _contexts: [{
-              _nearMisses: [{
-                tags: ['notdimacs']
-              }]
-            }],
+            tags: ['graffiti', 'dimacs'],
             _by: graffiti.myID
           }); postContent=''">
             <div class="flex-container">
@@ -330,11 +329,6 @@
                       type: 'like',
                       at: post._id,
                       _by: graffiti.myID,
-                      _contexts: [{
-                        _nearMisses: [{
-                          at: 'not' + post._id
-                        }]
-                      }]
                     })">like</button>
                   </template>
                   <template v-else>
@@ -374,7 +368,7 @@
       </li>
       <li>
         Data objects lack an intrinsic schema; norms evolve naturally as a <strong>folksonomy</strong>.
-        <span class="delayed">(Like <a href="https://www.w3.org/TR/activitystreams-core/">Activity Streams</a>).</span>
+        <span class="delayed">(Like <a href="https://www.w3.org/TR/activitystreams-core/">ActivityStreams</a>).</span>
       </li>
       <li>
         Data objects have no extrinsic organization; collections of objects are built from <strong>queries</strong>.
@@ -396,7 +390,7 @@
           :query="{
             type: 'post',
             content: { '$type': 'string' },
-            tags: 'dimacs'
+            tags: {'$all': ['graffiti', 'dimacs']}
           }"
           :page-size="20"
           :live="true" >
@@ -854,6 +848,34 @@
       </graffiti-collection>
     </graffiti-app>
   </article>
+
+  <article class="slide">
+    <h1>
+      That's about it!
+    </h1>
+
+    <p class="delayed">
+      An unstructured shared database with intrinsic contextual boundaries.
+    </p>
+
+    <p class="delayed">
+      Two things I didn't mention:
+      <ul class="delayed-children">
+        <li>
+          Neighbors: <span class="quote">sufficiently vauge</span>
+        </li>
+        <li>
+          Access control though context.
+        </li>
+      </ul>
+    </p>
+  </article>
+
+  <header class="slide">
+    <h1>
+      Wrapping Up
+    </h1>
+  </header>
 
   <article class="slide">
     <h1>
