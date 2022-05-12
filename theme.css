@@ -99,6 +99,7 @@ pre + pre {
 }
 
 img {
+  border: 3px solid;
 	max-width: 100%;
 	max-height: 100%;
 	object-fit: contain;
@@ -337,13 +338,15 @@ input {
   flex-wrap: nowrap;
 	align-items: center;
 	justify-content: center;
+  text-align: center;
 }
 
 
 .flex-item {
+  flex-basis: 0;
   flex-grow: 1;
   line-height: 0;
-  padding: 1vmin;
+  margin: 1vmin;
 }
 
 sup {
@@ -415,4 +418,8 @@ graffiti-app {
 .bubble-name {
   font-size: 80%;
   font-weight: bold;
+}
+
+.half-row {
+  height: 30vh;
 }
