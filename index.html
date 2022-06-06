@@ -4,10 +4,6 @@
   <meta charset="UTF-8">
   <title>graffiti presentation</title>
 
-  <!-- Graffiti Dependencies --> 
-  <script src="https://unpkg.com/vue@3.2.31/dist/vue.global.prod.js"></script>
-  <script type="module" src="https://sportdeath.github.io/graffiti-tools/vue.js"></script>
-
   <!-- Slide Dependencies -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/blissfuljs/1.0.6/bliss.shy.min.js"></script>
   <script src="https://inspirejs.org/inspire.mjs" type="module"></script>
@@ -214,14 +210,20 @@
 
     <article class="slide" id="login">
       <h1>How about a social network in a slideshow...</h1>
-      <graffiti-app data='{"editing": false}' class="delayed">
+      <div id="app1">
+          <template v-if="!$graffiti.loggedIn">
+            <button @click="$graffiti.logIn">log in to graffiti!</button>
+          </template>
+          <template v-else>
+            <button @click="$graffiti.logOut">log out</button>
+          </template>
           <graffiti-collection v-slot="name"
             :query="{
               type: 'description',
-              subject: graffiti.myID,
+              subject: $graffiti.myID,
               descriptor: 'name',
               description: {'$type': 'string'},
-              _by: graffiti.myID
+              _by: $graffiti.myID
             }">
             <div class="delayed">
               My name is:
@@ -229,10 +231,10 @@
                 <input v-model="editName" class="fixed-field">
                 <button @click="name.update({
                   type: 'description',
-                  subject: graffiti.myID,
+                  subject: $graffiti.myID,
                   descriptor: 'name',
                   description: editName,
-                  _by: graffiti.myID
+                  _by: $graffiti.myID
                 });editing=false">
                   ✅
                 </button>
@@ -252,11 +254,11 @@
               </template>
             </div>
           </graffiti-collection>
-      </graffiti-app>
+      </div>
     </article>
 
     <article class="slide">
-      <graffiti-app>
+      <div id="app2">
 
         <h1>
         Do you have any questions so far?
@@ -267,15 +269,14 @@
             type: 'post',
             content: { '$type': 'string' },
             tags: { '$all': ['graffiti', 'dimacs'] }
-          }"
-          :page-size="10"
-          :live="true" >
+          }" >
 
           <form @submit.prevent="posts.update({
             type: 'post', 
             content: postContent,
             tags: ['graffiti', 'dimacs'],
-            _by: graffiti.myID
+            timestamp: Date.now(),
+            _by: $graffiti.myID
           }); postContent=''">
             <div class="flex-container">
               <input v-model="postContent" class="flex-item"/>
@@ -293,10 +294,10 @@
                 <graffiti-collection v-slot="name"
                   :query="{
                     type: 'description',
-                    subject: graffiti.myID,
+                    subject: post._by,
                     descriptor: 'name',
                     description: {'$type': 'string'},
-                    _by: graffiti.myID
+                    _by: post._by
                   }"
                   :live="true">
                   <template v-if="name.object">
@@ -324,29 +325,29 @@
 
                   {{likes.objects.length}}
 
-                  <template v-if="!likes.objects.filter(l => l._by==graffiti.myID).length">
+                  <template v-if="!likes.objects.filter(l => l._by==$graffiti.myID).length">
                     <button @click="likes.update({
                       type: 'like',
                       at: post._id,
-                      _by: graffiti.myID,
+                      _by: $graffiti.myID,
                     })">like</button>
                   </template>
                   <template v-else>
-                    <button @click="likes.delete(likes.objects.filter(l => l._by==graffiti.myID)[0]._id)">
+                    <button @click="likes.delete(likes.objects.filter(l => l._by==$graffiti.myID)[0]._id)">
                       unlike
                     </button>
                   </template>
 
                 </graffiti-collection>
 
-              <template v-if="post._by==graffiti.myID">
+              <template v-if="post._by==$graffiti.myID">
                 <button @click="posts.delete(post._id)">delete</button>
               </template>
               </div>
             </div>
           </div>
         </graffiti-collection>
-      </graffiti-app>
+      </div>
     </article>
 
   <header class="slide">
@@ -383,17 +384,15 @@
     
   </article>
 
-  <article class="demo slide" id="collection-demo">
+  <article class="isolated demo slide" id="collection-demo">
     <textarea class="language-html">
-      <graffiti-app>
+      <div id="app">
         <graffiti-collection v-slot="posts"
           :query="{
             type: 'post',
             content: { '$type': 'string' },
             tags: {'$all': ['graffiti', 'dimacs']}
-          }"
-          :page-size="20"
-          :live="true" >
+          }">
 
           <ul class="post-list">
             <template v-for="post in posts.objects" :key="post._id">
@@ -405,7 +404,12 @@
             </template>
           </ul>
         </graffiti-collection>
-      </graffiti-app>
+      </div>
+      <script type="module">
+        import { createApp } from "https://unpkg.com/vue@3.2.36/dist/vue.esm-browser.prod.js"
+        import Graffiti from "https://sportdeath.github.io/graffiti-tools/vue.js"
+        Graffiti().then(g=>createApp().use(g).mount("#app"))
+      </script>
     </textarea>
   </article>
 
@@ -670,8 +674,7 @@
   </article>
 
   <article class="slide" id="context-demo">
-    <graffiti-app data='{"by": {"$exists": true}, "inReplyTo": {"$exists": true}, "tags": [], "post": {"_by": "ff30f6c3-9f85-5565-82a1-7458a1d41d4e", "content": "this is cool!", "inReplyTo": "coolarticle", "tags": ["cs", "law"]}, "id": ""}'>
-
+    <div id="app3">
       <graffiti-collection v-slot="poster" :query="post">
         <div class="flex-container" style="text-align:left; flex-grow:1">
           <div class="flex-item" style="line-height: 1em; flex-grow:2">
@@ -691,7 +694,10 @@
               with near miss(es):
             </p>
             <br>
-            <button @click="poster.update(post)" class="missbutton">
+            <button @click="
+              const copy=Object.assign({},post);
+              copy.timestamp = Date.now();
+              poster.update(copy)" class="missbutton">
               <pre>
 {}
               </pre>
@@ -701,8 +707,10 @@
               const copy=Object.assign({},post);
               const miss=Object.assign({},post);
               miss._by = 'notme';
+              copy.timestamp = Date.now();
+              miss.timestamp = copy.timestamp;
               copy._contexts = [{
-                nearMisses: [miss]
+                _nearMisses: [miss]
               }]
               poster.update(copy)" class="missbutton">
               <pre>
@@ -714,8 +722,10 @@
               const copy=Object.assign({},post);
               const miss=Object.assign({},post);
               miss.inReplyTo = 'notcoolarticle';
+              copy.timestamp = Date.now();
+              miss.timestamp = copy.timestamp;
               copy._contexts = [{
-                nearMisses: [miss]
+                _nearMisses: [miss]
               }]
               poster.update(copy)" class="missbutton">
               <pre>
@@ -728,8 +738,10 @@
               const miss=Object.assign({},post);
               miss.inReplyTo = 'notcoolarticle';
               miss.tags = ['notcs', 'notlaw'];
+              copy.timestamp = Date.now();
+              miss.timestamp = copy.timestamp;
               copy._contexts = [{
-                nearMisses: [miss]
+                _nearMisses: [miss]
               }];
               poster.update(copy)" class="missbutton">
               <pre>
@@ -748,8 +760,12 @@
               miss1.inReplyTo = 'notcoolarticle';
               miss2.tags = ['notcs', 'law'];
               miss3.tags = ['notlaw', 'cs'];
+              copy.timestamp = Date.now();
+              miss1.timestamp = copy.timestamp;
+              miss2.timestamp = copy.timestamp;
+              miss3.timestamp = copy.timestamp;
               copy._contexts = [{
-                nearMisses: [miss1, miss2, miss3]
+                _nearMisses: [miss1, miss2, miss3]
               }]
               poster.update(copy)" class="missbutton">
               <pre>
@@ -781,10 +797,8 @@
           <div class="flex-item" style="line-height: 1em; flex-grow:0">
             <div class="context-item">
             <graffiti-collection v-slot="byme"
-              :query="{ _by: graffiti.myID }"
-              :page-size: "0"
-              :live="true">
-              <span v-if="byme.object && byme.object._timestamp == poster.object._timestamp">
+              :query="{ _by: $graffiti.myID, timestamp: {$exists: true} }">
+              <span v-if="byme.object && byme.object.timestamp == poster.object.timestamp">
                 ✅
               </span>
               <span v-else>
@@ -794,10 +808,8 @@
             </div>
             <div class="context-item">
             <graffiti-collection v-slot="inreply"
-              :query="{ inReplyTo: 'coolarticle' }"
-              :page-size: "0"
-              :live="true">
-              <span v-if="inreply.object && inreply.object._timestamp == poster.object._timestamp">
+              :query="{ inReplyTo: 'coolarticle', timestamp: {$exists: true} }">
+              <span v-if="inreply.object && inreply.object.timestamp == poster.object.timestamp">
                 ✅
               </span>
               <span v-else>
@@ -807,10 +819,8 @@
             </div>
             <div class="context-item">
             <graffiti-collection v-slot="cs"
-              :query="{ tags: 'cs' }"
-              :page-size: "0"
-              :live="true">
-              <span v-if="cs.object && cs.object._timestamp == poster.object._timestamp">
+              :query="{ tags: 'cs', timestamp: {$exists: true} }">
+              <span v-if="cs.object && cs.object.timestamp == poster.object.timestamp">
                 ✅
               </span>
               <span v-else>
@@ -820,10 +830,8 @@
             </div>
             <div class="context-item">
             <graffiti-collection v-slot="law"
-              :query="{ tags: 'law' }"
-              :page-size: "0"
-              :live="true">
-              <span v-if="law.object && law.object._timestamp == poster.object._timestamp">
+             :query="{ tags: 'law', timestamp: {$exists: true} }">
+              <span v-if="law.object && law.object.timestamp == poster.object.timestamp">
                 ✅
               </span>
               <span v-else>
@@ -833,10 +841,8 @@
             </div>
             <div class="context-item">
             <graffiti-collection v-slot="all"
-              :query="{ inReplyTo: 'coolarticle', tags: { '$all': ['law', 'cs'] } }"
-              :page-size: "0"
-              :live="true">
-              <span v-if="all.object && all.object._timestamp == poster.object._timestamp">
+             :query="{ inReplyTo: 'coolarticle', tags: { '$all': ['law', 'cs'] }, timestamp: {$exists: true} }">
+              <span v-if="all.object && all.object.timestamp == poster.object.timestamp">
                 ✅
               </span>
               <span v-else>
@@ -846,7 +852,7 @@
             </div>
         </div>
       </graffiti-collection>
-    </graffiti-app>
+    </div>
   </article>
 
   <article class="slide">
@@ -957,6 +963,38 @@
       </li>
     </ul>
   </article>
+  <script type="module">
+    import { createApp } from "https://unpkg.com/vue@3.2.36/dist/vue.esm-browser.prod.js"
+    import Graffiti from "https://sportdeath.github.io/graffiti-tools/vue.js"
+
+    Graffiti().then(g => {
+      createApp({
+        data() {
+          return {
+            editing: false
+          }
+        }
+      }).use(g).mount("#app1")
+      createApp().use(g).mount("#app2")
+      createApp({
+        data() {
+          return {
+            by: {$exists: true},
+            inReplyTo: {"$exists": true},
+            tags: [],
+            post: {
+              _by: this.$graffiti.myID,
+              content: "this is cool!",
+              timestamp: {$exists: true},
+              inReplyTo: "coolarticle",
+              tags: ["cs", "law"]
+              },
+            id: ""
+          }
+        }
+      }).use(g).mount("#app3")
+    })
+  </script>
 </body>
 </html>
 
