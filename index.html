@@ -77,8 +77,8 @@
         </a>
       </div>
       <div class="flex-item half-row">
-        <a href="http://filterbuddy.org/">
-          <img class="flex-item" src="http://filterbuddy.org/static/youtube/square.jpeg"/>
+        <a href="https://filterbuddy.org/">
+          <img class="flex-item" src="https://filterbuddy.org/static/youtube/square.jpeg"/>
         </a>
       </div>
     </div>
@@ -268,7 +268,8 @@
           :query="{
             type: 'post',
             content: { '$type': 'string' },
-            tags: { '$all': ['graffiti', 'dimacs'] }
+            tags: { $all: ['graffiti', 'dimacs'] },
+            timestamp: { $exists: true }
           }" >
 
           <form @submit.prevent="posts.update({
@@ -798,7 +799,7 @@
             <div class="context-item">
             <graffiti-collection v-slot="byme"
               :query="{ _by: $graffiti.myID, timestamp: {$exists: true} }">
-              <span v-if="byme.object && byme.object.timestamp == poster.object.timestamp">
+              <span v-if="byme.object && poster.object && byme.object.timestamp == poster.object.timestamp">
                 ✅
               </span>
               <span v-else>
@@ -809,7 +810,7 @@
             <div class="context-item">
             <graffiti-collection v-slot="inreply"
               :query="{ inReplyTo: 'coolarticle', timestamp: {$exists: true} }">
-              <span v-if="inreply.object && inreply.object.timestamp == poster.object.timestamp">
+              <span v-if="inreply.object && poster.object && inreply.object.timestamp == poster.object.timestamp">
                 ✅
               </span>
               <span v-else>
@@ -820,7 +821,7 @@
             <div class="context-item">
             <graffiti-collection v-slot="cs"
               :query="{ tags: 'cs', timestamp: {$exists: true} }">
-              <span v-if="cs.object && cs.object.timestamp == poster.object.timestamp">
+              <span v-if="cs.object && poster.object && cs.object.timestamp == poster.object.timestamp">
                 ✅
               </span>
               <span v-else>
@@ -831,7 +832,7 @@
             <div class="context-item">
             <graffiti-collection v-slot="law"
              :query="{ tags: 'law', timestamp: {$exists: true} }">
-              <span v-if="law.object && law.object.timestamp == poster.object.timestamp">
+              <span v-if="law.object && poster.object && law.object.timestamp == poster.object.timestamp">
                 ✅
               </span>
               <span v-else>
@@ -842,7 +843,7 @@
             <div class="context-item">
             <graffiti-collection v-slot="all"
              :query="{ inReplyTo: 'coolarticle', tags: { '$all': ['law', 'cs'] }, timestamp: {$exists: true} }">
-              <span v-if="all.object && all.object.timestamp == poster.object.timestamp">
+              <span v-if="all.object && poster.object && all.object.timestamp == poster.object.timestamp">
                 ✅
               </span>
               <span v-else>
@@ -965,7 +966,7 @@
   </article>
   <script type="module">
     import { createApp } from "https://unpkg.com/vue@3.2.36/dist/vue.esm-browser.prod.js"
-    import Graffiti from "https://sportdeath.github.io/graffiti-tools/vue.js"
+    import Graffiti from "https://csail-graffiti.github.io/vue/src/plugin.js"
 
     Graffiti().then(g => {
       createApp({
@@ -980,7 +981,7 @@
         data() {
           return {
             by: {$exists: true},
-            inReplyTo: {"$exists": true},
+            inReplyTo: {$exists: true},
             tags: [],
             post: {
               _by: this.$graffiti.myID,
