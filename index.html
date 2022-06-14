@@ -383,9 +383,9 @@
     
   </article>
 
-  <article class="isolated demo slide" id="collection-demo">
+  <article class="demo slide" id="collection-demo">
     <textarea class="language-html">
-      <div id="app">
+      <graffiti-app>
         <graffiti-collection v-slot="posts"
           :query="{
             type: 'post',
@@ -403,12 +403,7 @@
             </template>
           </ul>
         </graffiti-collection>
-      </div>
-      <script type="module">
-        import { createApp } from "https://unpkg.com/vue@3.2.36/dist/vue.esm-browser.prod.js"
-        import Graffiti from "https://sportdeath.github.io/graffiti-tools/vue.js"
-        Graffiti().then(g=>createApp().use(g).mount("#app"))
-      </script>
+      </graffiti-app>
     </textarea>
   </article>
 
@@ -945,7 +940,7 @@
   </article>
   <script type="module">
     import { createApp } from "https://unpkg.com/vue@3.2.36/dist/vue.esm-browser.prod.js"
-    import Graffiti from "https://csail-graffiti.github.io/vue/plugin.js"
+    import { default as Graffiti, registerGraffitiApp } from "https://csail-graffiti.github.io/vue/plugin.js"
 
     Graffiti().then(g => {
       createApp({
@@ -968,6 +963,7 @@
           }
         }
       }).use(g).mount("#app3")
+      registerGraffitiApp(g, createApp)
     })
   </script>
 </body>
