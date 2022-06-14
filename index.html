@@ -269,14 +269,12 @@
             type: 'post',
             content: { '$type': 'string' },
             tags: { $all: ['graffiti', 'dimacs'] },
-            timestamp: { $exists: true }
           }" >
 
           <form @submit.prevent="posts.update({
             type: 'post', 
             content: postContent,
             tags: ['graffiti', 'dimacs'],
-            timestamp: Date.now(),
             _by: $graffiti.myID
           }); postContent=''">
             <div class="flex-container">
@@ -697,7 +695,6 @@
             <br>
             <button @click="
               const copy=Object.assign({},post);
-              copy.timestamp = Date.now();
               poster.update(copy)" class="missbutton">
               <pre>
 {}
@@ -705,14 +702,10 @@
             </button>
             <br>
             <button @click="
-              const copy=Object.assign({},post);
-              const miss=Object.assign({},post);
-              miss._by = 'notme';
-              copy.timestamp = Date.now();
-              miss.timestamp = copy.timestamp;
-              copy._contexts = [{
-                _nearMisses: [miss]
-              }]
+              const copy = Object.assign({},post);
+              copy._nearMisses = [
+                o=> o._by = 'notme'
+              ];
               poster.update(copy)" class="missbutton">
               <pre>
 { _by: 'notme' }
@@ -721,13 +714,9 @@
             <br>
             <button @click="
               const copy=Object.assign({},post);
-              const miss=Object.assign({},post);
-              miss.inReplyTo = 'notcoolarticle';
-              copy.timestamp = Date.now();
-              miss.timestamp = copy.timestamp;
-              copy._contexts = [{
-                _nearMisses: [miss]
-              }]
+              copy._nearMisses = [
+                o=> o.inReplyTo = 'notcoolarticle'
+              ]
               poster.update(copy)" class="missbutton">
               <pre>
 { inReplyTo: 'notcoolarticle' }
@@ -736,14 +725,12 @@
             <br>
             <button @click="
               const copy=Object.assign({},post);
-              const miss=Object.assign({},post);
-              miss.inReplyTo = 'notcoolarticle';
-              miss.tags = ['notcs', 'notlaw'];
-              copy.timestamp = Date.now();
-              miss.timestamp = copy.timestamp;
-              copy._contexts = [{
-                _nearMisses: [miss]
-              }];
+              copy._nearMisses = [
+                o=> {
+                  o.inReplyTo = 'notcoolarticle';
+                  o.tags = ['notcs', 'nowlaw'];
+                }
+              ]
               poster.update(copy)" class="missbutton">
               <pre>
 {
@@ -755,19 +742,11 @@
             <br>
             <button @click="
               const copy=Object.assign({},post);
-              const miss1=Object.assign({},post);
-              const miss2=Object.assign({},post);
-              const miss3=Object.assign({},post);
-              miss1.inReplyTo = 'notcoolarticle';
-              miss2.tags = ['notcs', 'law'];
-              miss3.tags = ['notlaw', 'cs'];
-              copy.timestamp = Date.now();
-              miss1.timestamp = copy.timestamp;
-              miss2.timestamp = copy.timestamp;
-              miss3.timestamp = copy.timestamp;
-              copy._contexts = [{
-                _nearMisses: [miss1, miss2, miss3]
-              }]
+              copy._nearMisses = [
+                o=> o.inReplyTo = 'notcoolarticle',
+                o=> o.tags = ['notcs', 'law'],
+                o=> o.tags = ['notlaw', 'cs']
+              ]
               poster.update(copy)" class="missbutton">
               <pre>
 [
@@ -798,7 +777,7 @@
           <div class="flex-item" style="line-height: 1em; flex-grow:0">
             <div class="context-item">
             <graffiti-collection v-slot="byme"
-              :query="{ _by: $graffiti.myID, timestamp: {$exists: true} }">
+              :query="{ _by: $graffiti.myID }">
               <span v-if="byme.object && poster.object && byme.object.timestamp == poster.object.timestamp">
                 ✅
               </span>
@@ -809,7 +788,7 @@
             </div>
             <div class="context-item">
             <graffiti-collection v-slot="inreply"
-              :query="{ inReplyTo: 'coolarticle', timestamp: {$exists: true} }">
+              :query="{ inReplyTo: 'coolarticle' }">
               <span v-if="inreply.object && poster.object && inreply.object.timestamp == poster.object.timestamp">
                 ✅
               </span>
@@ -820,7 +799,7 @@
             </div>
             <div class="context-item">
             <graffiti-collection v-slot="cs"
-              :query="{ tags: 'cs', timestamp: {$exists: true} }">
+              :query="{ tags: 'cs' }">
               <span v-if="cs.object && poster.object && cs.object.timestamp == poster.object.timestamp">
                 ✅
               </span>
@@ -831,7 +810,7 @@
             </div>
             <div class="context-item">
             <graffiti-collection v-slot="law"
-             :query="{ tags: 'law', timestamp: {$exists: true} }">
+             :query="{ tags: 'law' }">
               <span v-if="law.object && poster.object && law.object.timestamp == poster.object.timestamp">
                 ✅
               </span>
@@ -842,7 +821,7 @@
             </div>
             <div class="context-item">
             <graffiti-collection v-slot="all"
-             :query="{ inReplyTo: 'coolarticle', tags: { '$all': ['law', 'cs'] }, timestamp: {$exists: true} }">
+             :query="{ inReplyTo: 'coolarticle', tags: { '$all': ['law', 'cs'] } }">
               <span v-if="all.object && poster.object && all.object.timestamp == poster.object.timestamp">
                 ✅
               </span>
@@ -980,17 +959,12 @@
       createApp({
         data() {
           return {
-            by: {$exists: true},
-            inReplyTo: {$exists: true},
-            tags: [],
             post: {
               _by: this.$graffiti.myID,
               content: "this is cool!",
-              timestamp: {$exists: true},
               inReplyTo: "coolarticle",
               tags: ["cs", "law"]
-              },
-            id: ""
+            },
           }
         }
       }).use(g).mount("#app3")
